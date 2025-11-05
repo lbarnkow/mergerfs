@@ -1,0 +1,13 @@
+#!/bin/sh
+
+GIT_BRANCH="2.41.0-rc4"
+
+podman \
+    build \
+    --force-rm \
+    --build-arg="GIT_REPO=file:///tmp/mergerfs.git" \
+    --build-arg="BRANCH=${GIT_BRANCH}" \
+    -v "${PWD}":/tmp/mergerfs.git:ro \
+    -f "buildtools/containerimage/Containerfile" \
+    --tag "mergerfs:${GIT_BRANCH}" \
+    buildtools/
